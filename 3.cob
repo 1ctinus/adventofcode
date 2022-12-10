@@ -22,7 +22,6 @@
        01 line2 PIC X(256).
        01 line3 PIC X(256).
        01 chosenone PIC X(1).
-       01 middlepoint pic 9(4).
        01 h pic 9(1) value 1.
        01 linelength pic 9(4).
        01 k pic 9(4) value 1.
@@ -42,8 +41,6 @@
            PERFORM VARYING line-count FROM 1 BY 1 UNTIL end-of-file
 
              READ input-file
-      //  MOVE FUNCTION BYTE-LENGTH(FUNCTION TRIM(input-record)) TO
-      //          linelength
                IF h = 1
                  MOVE FUNCTION TRIM(input-record) TO line1
                END-IF
@@ -62,9 +59,7 @@
                END-IF
             ADD 1 TO h
            END-PERFORM
-
            CLOSE input-file
-
            GOBACK
            .
         loop.
@@ -83,7 +78,6 @@
            IF line1(i:1) = line2(j:1)
            IF line1(i:1) = line3(k:1)
              MOVE line2(j:1) TO chosenone
-             DISPLAY line1(i:1)
           END-IF
            END-IF
           ADD 1 to k
@@ -94,5 +88,3 @@
            END-IF
            ADD 1 to i
            .
-       
-
